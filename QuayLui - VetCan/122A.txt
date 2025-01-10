@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+// #include<cmath>
+#define int long long
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+using namespace std;
+ 
+int isLucky(int a)
+{
+	int isLuck = 1;
+	int temp = a;
+	while(temp)
+	{
+		if(temp%10!=4 and temp%10!=7)
+		{
+			isLuck = 0;
+		}
+		temp/=10;
+	}
+	return isLuck;
+}
+ 
+int32_t main()
+{	
+	IOS;
+	int n; cin >> n;
+	vector<int> v(1001);
+	for(auto i=0;i<1001;i++)
+	{
+		v[i] = 1;
+	}
+	for(auto i=1;i<1001;i++)
+	{
+		v[i] = isLucky(i);
+	}
+	for(auto i=1;i<1001;i++)
+	{
+		if(v[i] == 0)
+		{
+			for(auto j=1;j<=i;j++)
+			{
+				if(v[j]==1 and i%j==0)
+				{
+					v[i] = 1;
+					break;
+				}
+			}
+		}
+		// cout << i << " " << v[i] << endl;
+	}
+ 
+	if(v[n] == 1)
+		cout << "YES";
+	else
+		cout << "NO";
+	return 0;
+}
